@@ -1,4 +1,5 @@
 library(rvest)
+library(tidyverse)
 
 read_html("https://en.wikipedia.org/wiki/List_of_military_and_civilian_missions_of_the_European_Union") %>%
   html_table(header = TRUE, fill = TRUE) %>% 
@@ -25,6 +26,9 @@ eu_wiki %<>%
 
 eu_wiki %<>% 
   select(!no_day)
+
+eu_wiki %>% names
+
 
 eu_wiki %<>% 
   mutate(country = ifelse(grepl("Rafah", name), "Palestinian Territories", country)) %>% 
